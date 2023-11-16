@@ -1,0 +1,79 @@
+version: "3.8"
+services:
+  # 代理服务器
+  nginx:
+    build: ./dockerfile/nginx-dujiaoka
+    container_name: DujiaokaNginx
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./dujiaoka/:/var/www/dujiaoka/
+    ports:
+      - 80:80
+      # 不需要https注释掉下行
+      - 443:443
+    restart: always
+    command: [ nginx, '-g', 'daemon off;' ]
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:latest
+    container_name: DujiaokaMysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    restart: always
+
+  mysql-init:
+    image: mysql:latest
+    container_name: DujiaokaMysqlInit
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    command: /bin/bash -c "while true;do mysql -hmysql -uroot -pmy-secret-pw -e \"CREATE DATABASE IF NOT EXISTS dujiaoka\" && break;done;"
+    depends_on:
+      - nginx
+
+  php:
+    build: ./dockerfile/php-dujiaoka
+    container_name: DujiaokaPHP
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./dujiaoka/:/var/www/dujiaoka/
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+
+  redis:
+    container_name: Redis
+    image: redis:latest
+    volumes:
+      - ./data/redis_data:/data
+    command: redis-server --save 60 1 --loglevel warning
+    expose:
+      - 6379
+    restart: always
+
+  php-queue:
+    build: ./dockerfile/php-dujiaoka
+    container_name: DujiaokaPhpQueue
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./dujiaoka/:/var/www/dujiaoka/
+    restart: always
+    command: php /var/www/dujiaoka/artisan queue:work
+    depends_on:
+      - mysql
+      - redis
+
+  php-compose:
+    build: ./dockerfile/php-dujiaoka
+    container_name: DujiaokaCompose
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./dujiaoka/:/var/www/dujiaoka/
+    command: /bin/bash -c "cd /var/www/dujiaoka;/usr/local/bin/composer install --ignore-platform-reqs --no-scripts"

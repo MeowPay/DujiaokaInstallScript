@@ -33,7 +33,7 @@ services:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
     volumes:
       - ./data/mysql:/var/lib/mysql
-    command: /bin/bash -c "while true;do mysql -hmysql -uroot -pmy-secret-pw -e \"CREATE DATABASE IF NOT EXISTS dujiaoka\" && break;done;"
+    command: /bin/bash -c "while true;do mysql -hmysql -uroot -pmy-secret-pw -e \"CREATE DATABASE IF NOT EXISTS dujiaoka\" && break;sleep1;done;"
     depends_on:
       - nginx
 

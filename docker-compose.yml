@@ -15,7 +15,6 @@ x-php: &default-php
   volumes:
     - ./conf.d/:/etc/nginx/conf.d/
     - ./dujiaoka/:/var/www/dujiaoka/
-  restart: always
   depends_on:
     - mysql
     - redis
@@ -56,6 +55,7 @@ services:
   # PHP环境
   php:
     <<: *default-php
+    restart: always
 
   # Redis
   redis:
@@ -75,6 +75,7 @@ services:
     #不想编译的可以直接使用镜像
     # image: ghcr.io/meowpay/dujiaoka:v2024_01_25
     # container_name: DujiaokaPhpQueue
+    restart: always
 
   # 安装依赖
   php-compose:

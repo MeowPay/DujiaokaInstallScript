@@ -1,4 +1,5 @@
 # Install Script for [Dujiaoka](https://github.com/assimon/dujiaoka)
+# Dujiaoka版本： Aug 21, 2023
 
 搭建独角数卡系统，总是会遇到各种问题，加之php的环境和extensions很复杂，所以写了个脚本方便搭建和后续测试
 

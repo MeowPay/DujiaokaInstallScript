@@ -24,7 +24,7 @@ chmod -x install.sh
 chmod -R 777 dujiaoka
 which docker-compose && {
     docker-compose up -d
-    while true:; do
+    while true; do
         docker-compose ps | grep php-compose && {
             echo "php-compose is running"
             sleep 5
@@ -42,7 +42,7 @@ which docker-compose && {
             echo 脚本已经停止运行
             exit 1
         }
-        while true:; do
+        while true; do
             docker compose ps | grep php-compose && {
                 echo "php-compose is running"
                 sleep 5

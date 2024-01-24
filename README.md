@@ -47,3 +47,12 @@ redis存储于 data/redis
 dujiaoka 于 dujiaoka
 
 ### 有疑问及反馈欢迎联系 [https://t.me/MeowPayCN](https://t.me/MeowPayCN)
+#### 捐赠作者一杯咖啡☕️
+TRX、USDT-TRC20 打赏地址：
+```
+TE74XjX6KmGhJNnEThRPnzc46hxM128gdg
+```
+XMR(Monero) 打赏地址：
+```
+88iFm6z81w1i5u6TcXv1xzSn71kKLiukYVeNJ5kUVr7vf8GYryuBdCrWXH9mkhzZSD1KZYHq5w59xCJ5ACogRKnQL7ZApLY
+```

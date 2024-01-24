@@ -45,4 +45,4 @@ redis存储于 data/redis
 
 dujiaoka 于 dujiaoka
 
-### 有疑问及反馈欢迎联系 [https://t.me/meow_pay](https://t.me/meow_pay)
+### 有疑问及反馈欢迎联系 [https://t.me/MeowPayCN](https://t.me/MeowPayCN)
